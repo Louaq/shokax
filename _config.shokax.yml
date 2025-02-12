@@ -1,0 +1,116 @@
+statics: "/" # 静态文件根目录，可用于 CDN 加速
+assets: "assets" # 图片资源存放目录
+css: "css" # css 存放目录 (不建议改动)
+js: "js" # js 存放目录 (不建议改动)
+
+modules:
+  player: true # 启用音乐播放器
+  fireworks: true # 启用鼠标点击烟花特效
+  unlazyHash: false # 启用unlazy hash预览图支持
+  visibilityListener: true # 启用可见度监听器
+  tabs: true # 启用选项卡扩展支持，如需开启 summary 功能请一并开启
+  quiz: true # 启用文章内问题扩展支持
+  fancybox: true # 启用 fancybox 支持（不建议禁用）
+  
+homeConfig:
+  gradient: false # 使用CSS渐变作为文章封面
+  # fixedCover 性能比默认的更好，且开启时将启用LCP优化和预加载
+  fixedCover: "" # 主页面cover(为空则使用bing随机图片)
+  
+menu:
+  home: / || home
+  posts:
+     default: / || feather
+     archives: /archives/ || list-alt
+     categories: /categories/ || th
+     tags: /tags/ || tags
+  朋友: /friends/ || heart
+  友链: /webstack/ || magic
+  状态: https://luqu8.top/status/webmonitor || th
+  about: /about/ || user
+  
+social:
+  github: https://github.com/Louaq || github || "#191717"
+  #twitter: https://twitter.com/yourname || twitter || "#00aff0"
+  zhihu: https://www.zhihu.com/people/an-ye-jing-ling-64-3 || zhihu || "#1e88e5"
+  music: https://music.163.com/?from=infinity#/user/home?id=1525018658 || cloud-music || "#e60026"
+  weibo: https://www.weibo.com/u/5769723850 || weibo || "#ea716e"
+  about: https://about.me/yourname || address-card || "#3b5998"
+  email: mailto:yangyang@mail.scuec.edu.cn || envelope || "#55acd5"
+  #facebook: https://www.facebook.com/yourname || facebook
+  #stackoverflow: https://stackoverflow.com/yourname || stack-overflow
+  #youtube: https://youtube.com/yourname || youtube
+  #instagram: https://instagram.com/yourname || instagram
+  #skype: skype:yourname?call|chat || skype
+  douban: https://www.douban.com/people/253156361 || douban
+
+#twikoo:
+  #enable: true # 是否开启
+  #mode: vercel # vercel(私有部署) 或 tencent
+  #envId: "https://twikoo-mstf.vercel.app" # twikoo 环境 ID,vercel 和私有部署填地址
+  #region: # vercel 和私有部署不填，腾讯云见 twikoo 文档
+
+waline:
+  enable: true # 是否启用
+  serverURL: "https://waline-comments-mstf.vercel.app" # waline 服务端地址
+  lang: "zh-CN" # 评论界面语言
+  locale: {} # 本地化替换，详见 waline 文档
+  emoji: # 表情包，默认为 waline 官方配置
+    - https://unpkg.com/@waline/emojis@1.0.1/weibo
+    - https://unpkg.com/@waline/emojis@1.0.1/alus
+    - https://unpkg.com/@waline/emojis@1.0.1/bilibili
+    - https://unpkg.com/@waline/emojis@1.0.1/qq
+    - https://unpkg.com/@waline/emojis@1.0.1/tieba
+    - https://unpkg.com/@waline/emojis@1.0.1/tw-emoji
+  meta: # 评论可以填写的项目
+    - nick
+    - mail
+    - link
+  requiredMeta: # 评论必须填写的项目
+    - nick
+    - mail
+  wordLimit: 0 # 评论字数上限 (不建议为 0)
+  pageSize: 10 # 每页显示评论条数
+  pageview: true # 页面浏览量显示
+
+sidebar:
+  position: right # left/right分别对应左侧/右侧
+  avatar: avatar.png
+  
+  
+alternate: "Drawing Life" #站点大标题，（比 title 高一级，但仅在 index 显示）
+
+widgets:
+  random_posts: true # 随机文章
+  recent_comments: true # 显示最近评论
+  
+# 页尾全站统计
+footer:
+  since: 2024 # 开始时间
+  count: true # 开启
+# 文章界面统计
+post:
+  count: true # 开启
+  
+performance:
+  # 使用 preconnect 预加载的地址 (不建议超过三个)
+  preConnect:
+    - "https://lf9-cdn-tos.bytecdntp.com"
+  # 使用 dns-prefetch 预解析的地址
+  dnsPrefetch:
+    - "https://cdn.jsdelivr.net"
+    - "https://unpkg.com"
+
+seo:
+  bing:
+  google:
+  yandex:
+  baidu:
+
+visitor:
+  clarity: false
+  baiduAnalytics: false
+  googleAnalytics: false
+
+darkmode: false # true/false分别对应打开/关闭夜间模式
+auto_scroll: false
