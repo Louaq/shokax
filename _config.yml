@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://louaq.github.io/shokax/
+url: https://shokop.netlify.app
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -184,11 +184,11 @@ feed:
     template: "node_modules/hexo-theme-shokax/layout/_alternate/json.ejs"
     output: "feed.json"
 algolia:
-  appId: 7EJVL8BNWL #Your appId
-  apiKey: 6b6081814c364e05be7f60040cba90bb #Your apiKey
-  adminApiKey: d3c158ff3df4b528c9151bfdf8aa3cee #Your adminApiKey
+  appId: O5H3BE9DR9 #Your appId
+  apiKey: 7250c0fa861be3312a42838fd9119c3d #Your apiKey
+  adminApiKey: 4443231859aa5a7927ba8091d69e1953 #Your adminApiKey
   chunkSize: 5000
-  indexName: "shoka" #"shokaX"
+  indexName: "shokax" 
   fields:
     - title #必须配置
     - path #必须配置
@@ -197,4 +197,3 @@ algolia:
     - gallery
     - photos
     - tags
-    - permalink
