@@ -72,7 +72,10 @@ waline:
   wordLimit: 0 # 评论字数上限 (不建议为 0)
   pageSize: 10 # 每页显示评论条数
   pageview: true # 页面浏览量显示
-
+# Whether to show the loading cat
+loader:
+  start: true # When entering the page
+  switch: false # When switching to another page
 sidebar:
   position: right # left/right分别对应左侧/右侧
   avatar: avatar.png
