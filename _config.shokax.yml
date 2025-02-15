@@ -5,8 +5,8 @@ js: "js" # js 存放目录 (不建议改动)
 
 modules:
   player: true # 启用音乐播放器
-  fireworks: true # 启用鼠标点击烟花特效
-  unlazyHash: false # 启用unlazy hash预览图支持
+  fireworks: false # 启用鼠标点击烟花特效
+  unlazyHash: true # 启用unlazy hash预览图支持
   visibilityListener: true # 启用可见度监听器
   tabs: true # 启用选项卡扩展支持，如需开启 summary 功能请一并开启
   quiz: true # 启用文章内问题扩展支持
@@ -79,8 +79,15 @@ loader:
 sidebar:
   position: right # left/right分别对应左侧/右侧
   avatar: avatar.png
+# bgm
+audio:
+  - title: like
+    list:
+      - https://music.163.com/#/playlist?id=2669325401
   
-  
+# random image api
+image_server: https://t.mwm.moe/fj
+
 alternate: "Drawing Life" #站点大标题，（比 title 高一级，但仅在 index 显示）
 
 widgets:
