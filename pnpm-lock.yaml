@@ -17,6 +17,9 @@ importers:
       algoliasearch:
         specifier: 5.18.0
         version: 5.18.0
+      dompurify:
+        specifier: ^3.2.4
+        version: 3.2.4
       esbuild:
         specifier: 0.24.2
         version: 0.24.2
@@ -77,6 +80,9 @@ importers:
       js-yaml:
         specifier: 4.1.0
         version: 4.1.0
+      katex:
+        specifier: ^0.16.21
+        version: 0.16.21
       mouse-firework:
         specifier: 0.0.6
         version: 0.0.6
@@ -98,6 +104,10 @@ importers:
       vue:
         specifier: 3.5.13
         version: 3.5.13(typescript@5.5.2)
+    devDependencies:
+      '@types/dompurify':
+        specifier: ^3.2.0
+        version: 3.2.0
 
 packages:
 
@@ -407,6 +417,10 @@ packages:
   '@types/dom-speech-recognition@0.0.1':
     resolution: {integrity: sha512-udCxb8DvjcDKfk1WTBzDsxFbLgYxmQGKrE/ricoMqHRNjSlSUCcamVTA5lIQqzY10mY5qCY0QDwBfFEwhfoDPw==}
 
+  '@types/dompurify@3.2.0':
+    resolution: {integrity: sha512-Fgg31wv9QbLDA0SpTOXO3MaxySc4DKGLi8sna4/Utjo4r3ZRPdCt4UQee8BWr+Q5z21yifghREPJGYaEOEIACg==}
+    deprecated: This is a stub types definition. dompurify provides its own type definitions, so you do not need this installed.
+
   '@types/google.maps@3.58.1':
     resolution: {integrity: sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==}
 
@@ -418,6 +432,9 @@ packages:
 
   '@types/qs@6.9.15':
     resolution: {integrity: sha512-uXHQKES6DQKKCLh441Xv/dwxOq1TVS3JPUMlEqoEglvlhR6Mxnlew/Xq/LRVHpLyk7iK3zODe1qYHIMltO7XGg==}
+
+  '@types/trusted-types@2.0.7':
+    resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
 
   '@types/web-bluetooth@0.0.20':
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
@@ -788,6 +805,9 @@ packages:
   domhandler@5.0.3:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
+
+  dompurify@3.2.4:
+    resolution: {integrity: sha512-ysFSFEDVduQpyhzAob/kkuJjf5zWkZD8/A9ywSp1byueyuCfHamrCBa14/Oc2iiB0e51B+NpxSl5gmzn+Ms/mg==}
 
   domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
@@ -1220,12 +1240,8 @@ packages:
   jstransformer@1.0.0:
     resolution: {integrity: sha512-C9YK3Rf8q6VAPDCCU9fnqo3mAfOH6vUGnMcP4AQAYIEpWtfGLpwOTmZ+igtdK5y+VvI2n3CyYSzy4Qh34eq24A==}
 
-  katex@0.16.10:
-    resolution: {integrity: sha512-ZiqaC04tp2O5utMsl2TEZTXxa6WSC4yo0fv5ML++D3QZv/vx2Mct0mTlRx3O+uUkjfuAgOkzsCmq5MiUEsDDdA==}
-    hasBin: true
-
-  katex@0.16.11:
-    resolution: {integrity: sha512-RQrI8rlHY92OLf3rho/Ts8i/XvjgguEjOkO1BEXcU3N8BqPpSzBNwV/G0Ukr+P/l3ivvJUE/Fa/CwbS6HesGNQ==}
+  katex@0.16.21:
+    resolution: {integrity: sha512-XvqR7FgOHtWupfMiigNzmh+MgUVmDGU2kXZm899ZkPfcuoPuFxyHmXsgATDpFZDAXCI8tvinaVcDo8PIIJSo4A==}
     hasBin: true
 
   lines-and-columns@1.2.4:
@@ -2242,6 +2258,10 @@ snapshots:
 
   '@types/dom-speech-recognition@0.0.1': {}
 
+  '@types/dompurify@3.2.0':
+    dependencies:
+      dompurify: 3.2.4
+
   '@types/google.maps@3.58.1': {}
 
   '@types/hogan.js@3.0.5': {}
@@ -2252,6 +2272,9 @@ snapshots:
     optional: true
 
   '@types/qs@6.9.15': {}
+
+  '@types/trusted-types@2.0.7':
+    optional: true
 
   '@types/web-bluetooth@0.0.20': {}
 
@@ -2682,6 +2705,10 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
+  dompurify@3.2.4:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
   domutils@3.1.0:
     dependencies:
       dom-serializer: 2.0.0
@@ -2969,7 +2996,7 @@ snapshots:
       deasync-promise: 1.0.1
       frappe-charts: 1.6.2
       hexo-util: 3.3.0
-      katex: 0.16.10
+      katex: 0.16.21
       markdown-it: 13.0.2
       markdown-it-abbr: 1.0.4
       markdown-it-attrs: 4.1.6(markdown-it@13.0.2)
@@ -3038,7 +3065,7 @@ snapshots:
       hexo-util: 3.3.0
       instantsearch.js: 4.75.6(algoliasearch@5.18.0)
       js-yaml: 4.1.0
-      katex: 0.16.11
+      katex: 0.16.21
       mouse-firework: 0.0.6
       quicklink: 2.3.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       theme-shokax-anime: 0.0.7
@@ -3247,11 +3274,7 @@ snapshots:
       is-promise: 2.2.2
       promise: 7.3.1
 
-  katex@0.16.10:
-    dependencies:
-      commander: 8.3.0
-
-  katex@0.16.11:
+  katex@0.16.21:
     dependencies:
       commander: 8.3.0
 

@@ -39,10 +39,6 @@ hexo.extend.generator.register("script", function(locals) {
     darkmode: theme.darkmode,
     auto_dark: theme.auto_dark,
     auto_scroll: theme.auto_scroll,
-    js: {
-      copy_tex: (0, import_utils.getVendorLink)(hexo, theme.vendors.async_js.copy_tex),
-      fancybox: (0, import_utils.getVendorLink)(hexo, theme.vendors.async_js.fancybox)
-    },
     css: {
       katex: (0, import_utils.getVendorLink)(hexo, theme.vendors.css.katex),
       mermaid: {

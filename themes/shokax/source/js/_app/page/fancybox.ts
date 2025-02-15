@@ -1,6 +1,14 @@
 import { $dom } from '../library/dom'
 import { vendorCss, vendorJs } from '../library/loadFile'
 import { insertAfter } from '../library/proto'
+import DOMPurify from 'dompurify';
+
+// 添加类型声明
+declare global {
+  interface Window {
+    jQuery: any;
+  }
+}
 
 // TODO 使用PhotoSwipe替换Fancybox
 export const postFancybox = (p:string) => {
@@ -10,7 +18,12 @@ export const postFancybox = (p:string) => {
     vendorJs('jquery', ()=>{
       vendorJs('justifiedGallery',()=>{
         vendorJs('fancybox', () => {
-          const q = jQuery.noConflict()
+          if (!window.jQuery) {
+            console.error('jQuery not loaded');
+            return;
+          }
+          
+          const q = window.jQuery.noConflict()
 
           $dom.each(p + ' p.gallery', (element) => {
             const box = document.createElement('div')
@@ -19,13 +32,15 @@ export const postFancybox = (p:string) => {
 
             box.innerHTML = element.innerHTML.replace(/<br>/g, '')
 
-            element.parentNode.insertBefore(box, element)
-            element.remove()
+            if (element.parentNode) {
+              element.parentNode.insertBefore(box, element)
+              element.remove()
+            }
           })
 
           $dom.each(p + ' .md img:not(.emoji):not(.vemoji)', (element) => {
             const $image = q(element)
-            const imageLink = $image.attr('data-src') || $image.attr('src') // 替换
+            const imageLink = DOMPurify.sanitize($image.attr('data-src') || $image.attr('src')) // 替换
             const $imageWrapLink = $image.wrap('<a class="fancybox" href="' + imageLink + '" itemscope itemtype="https://schema.org/ImageObject" itemprop="url"></a>').parent('a')
             let info; let captionClass = 'image-info'
             if (!$image.is('a img')) {
@@ -41,7 +56,7 @@ export const postFancybox = (p:string) => {
               const para = document.createElement('span')
               const txt = document.createTextNode(info)
               para.appendChild(txt)
-              para.addClass(captionClass)
+              para.classList.add(captionClass)
               insertAfter(element, para)
             }
           })
@@ -58,17 +73,32 @@ export const postFancybox = (p:string) => {
             })
           })
 
-          q.fancybox.defaults.hash = false
-          q(p + ' .fancybox').fancybox({
-            loop: true,
-            // @ts-ignore
-            helpers: {
-              overlay: {
-                locked: false
+          // 修改 fancybox 初始化部分
+          if (typeof q.fn.fancybox === 'function') {
+            q.fancybox.defaults.hash = false
+            q(p + ' .fancybox').fancybox({
+              loop: true,
+              helpers: {
+                overlay: {
+                  locked: false
+                }
+              },
+              buttons: [
+                "zoom",
+                "slideShow",
+                "fullScreen",
+                "close"
+              ],
+              protect: true,
+              animationEffect: "zoom",
+              touch: {
+                vertical: true,
+                momentum: true
               }
-            }
-          })
-          // @ts-ignore
+            })
+          } else {
+            console.error('fancybox not loaded properly');
+          }
         }, window.jQuery)
       })
     })
