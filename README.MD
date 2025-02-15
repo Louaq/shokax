@@ -1,4 +1,5 @@
-# ShokaX Can
+
+
 ## 开始
 ShokaX 即食罐头，使用 pnpm 加热即可食用，执行下列命令：
 ```bash
