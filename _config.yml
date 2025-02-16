@@ -5,7 +5,7 @@
 # Site
 title: 凡尘一叶可遮天
 subtitle: ''
-description: 'a simple blog'
+description: '就是很简单'
 keywords: louaq
 author: youllp
 language: zh-CN
@@ -188,6 +188,8 @@ algolia:
   apiKey: 7250c0fa861be3312a42838fd9119c3d #Your apiKey
   adminApiKey: 4443231859aa5a7927ba8091d69e1953 #Your adminApiKey
   chunkSize: 5000
+  clearIndex: true  # 强制清空旧索引
+  atomic: true      # 原子化更新（防止中间状态）
   indexName: "shokax" 
   fields:
     - title #必须配置
