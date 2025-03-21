@@ -1,4 +1,4 @@
-import type Hexo from 'hexo'
+const Hexo = require('hexo')
 
 declare const hexo:Hexo
 
