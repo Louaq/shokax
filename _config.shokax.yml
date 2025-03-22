@@ -1,4 +1,4 @@
-statics: "/" # 静态文件根目录，可用于 CDN 加速
+statics: "" # 静态文件根目录，可用于 CDN 加速
 assets: "assets" # 图片资源存放目录
 css: "css" # css 存放目录 (不建议改动)
 js: "js" # js 存放目录 (不建议改动)
@@ -10,7 +10,8 @@ modules:
   visibilityListener: true # 启用可见度监听器
   tabs: true # 启用选项卡扩展支持，如需开启 summary 功能请一并开启
   quiz: true # 启用文章内问题扩展支持
-  fancybox: true # 启用 fancybox 支持（不建议禁用）
+  fancybox: false # 禁用 fancybox，改用 medium-zoom
+  mediumZoom: true # 启用 medium-zoom
   
 homeConfig:
   gradient: false # 使用CSS渐变作为文章封面
