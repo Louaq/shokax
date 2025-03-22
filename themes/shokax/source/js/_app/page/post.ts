@@ -1,16 +1,24 @@
 import { $dom } from '../library/dom'
-import { postFancybox } from './fancybox'
+// import { postFancybox } from './fancybox'
 import { clipBoard, showtip } from '../globals/tools'
 import { CONFIG, BODY } from '../globals/globalVars'
 import { pageScroll, transition } from '../library/anime'
 import { mediaPlayer } from '../player'
 import { getDisplay, setDisplay, wrapObject } from '../library/proto'
 
+// 导入图片缩放功能
+import './zoom'
+
 export const postBeauty = () => {
   if (!document.querySelector('.md')) { return }
 
-  if (__shokax_fancybox__) {
-    postFancybox('.post.block')
+  // 使用我们的自定义图片缩放功能替代Fancybox
+  if (document.querySelector('.post.block .md img:not(.emoji):not(.vemoji)')) {
+    import('./zoom').then(({ setupImageZoom }) => {
+      setupImageZoom('.post.block .md img:not(.emoji):not(.vemoji)');
+    }).catch(err => {
+      console.error('Failed to load image zoom functionality:', err);
+    });
   }
 
   (document.querySelector('.post.block') as HTMLTextAreaElement).oncopy = (event) => {

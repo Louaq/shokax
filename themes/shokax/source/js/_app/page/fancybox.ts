@@ -22,7 +22,6 @@ export const postFancybox = (p:string) => {
         }
         
         const q = window.jQuery.noConflict()
-        let scrollPos = 0; // 保存滚动位置
 
         // 处理所有文章中的图片
         $dom.each(p + ' .md img:not(.emoji):not(.vemoji)', (element) => {
@@ -53,9 +52,24 @@ export const postFancybox = (p:string) => {
           }
         })
 
+        // 创建用于标记滚动位置的元素
+        if (!document.getElementById('scroll-marker')) {
+          const marker = document.createElement('div');
+          marker.id = 'scroll-marker';
+          marker.style.position = 'absolute';
+          marker.style.height = '1px';
+          marker.style.width = '1px';
+          marker.style.visibility = 'hidden';
+          document.body.appendChild(marker);
+        }
+
         // 修改fancybox初始化配置
         if (typeof q.fn.fancybox === 'function') {
           q.fancybox.defaults.hash = false
+          let scrollY = 0;
+          let scrollElement = null;
+          let markerElement = null;
+
           q(p + ' .fancybox').fancybox({
             loop: true,
             buttons: [
@@ -79,50 +93,70 @@ export const postFancybox = (p:string) => {
             },
             wheel: false,
             toolbar: true,
-            preventCaptionOverlap: true,
             touch: {
               vertical: true,
               momentum: true
             },
             baseClass: "fancybox-custom-layout",
+            backFocus: false,
+            autoFocus: false,
+            trapFocus: false,
+            preventCaptionOverlap: true,
+            // 不隐藏滚动条，避免页面跳动
+            hideScrollbar: false,
+            idleTime: false,
+            margin: [44, 0],
+            gutter: 0,
+            // 打开前保存当前视图中的元素
             beforeShow: function(instance, current) {
-              // 保存当前滚动位置
-              scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+              // 保存滚动位置
+              scrollY = window.scrollY;
               
-              // 确保图片已加载
-              const $img = q(current.opts.$orig).find('img')
-              if ($img.length && $img.attr('data-src')) {
-                $img.attr('src', $img.attr('data-src'))
-              }
-            },
-            afterShow: function(instance, current) {
-              // 添加键盘快捷键支持
-              q(document).on('keydown.fb', function (e) {
-                // ESC键关闭
-                if (e.keyCode === 27) {
-                  instance.close()
-                  return false
+              // 找到当前视图中的一个元素并记录
+              const viewportHeight = window.innerHeight;
+              const elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, img, pre');
+              let closestElement = null;
+              let minDistance = Infinity;
+              
+              elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                // 找到离视口中心最近的元素
+                const distance = Math.abs((rect.top + rect.bottom) / 2 - viewportHeight / 2);
+                if (distance < minDistance) {
+                  minDistance = distance;
+                  closestElement = el;
                 }
-                // 空格键播放/暂停幻灯片
-                if (e.keyCode === 32) {
-                  if (instance.SlideShow.isActive) {
-                    instance.SlideShow.stop()
-                  } else {
-                    instance.SlideShow.start()
-                  }
-                  return false
-                }
-              })
-            },
-            afterClose: function() {
-              // 恢复滚动位置
-              window.scrollTo({
-                top: scrollPos,
-                behavior: 'instant'
               });
               
-              // 移除键盘事件监听
-              q(document).off('keydown.fb');
+              scrollElement = closestElement;
+              
+              // 放置标记在滚动位置
+              markerElement = document.getElementById('scroll-marker');
+              if (markerElement && scrollElement) {
+                const rect = scrollElement.getBoundingClientRect();
+                markerElement.style.top = (window.scrollY + rect.top) + 'px';
+              }
+            },
+            afterClose: function() {
+              // 使用多种方法尝试恢复滚动位置
+              setTimeout(function() {
+                // 方法1: 使用保存的scrollY
+                window.scrollTo(0, scrollY);
+                
+                // 方法2: 如果有标记元素，滚动到标记元素
+                if (markerElement && scrollElement) {
+                  try {
+                    // 获取元素当前位置并滚动
+                    const rect = scrollElement.getBoundingClientRect();
+                    const targetY = window.scrollY + rect.top - 100; // 向上偏移一点
+                    window.scrollTo(0, targetY);
+                  } catch (e) {
+                    console.error('恢复滚动位置失败:', e);
+                    // 退回到方法1
+                    window.scrollTo(0, scrollY);
+                  }
+                }
+              }, 10);
             }
           })
         } else {

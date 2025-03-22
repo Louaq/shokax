@@ -49,7 +49,7 @@ modules:
   visibilityListener: true # 启用可见度监听器
   tabs: true # 启用选项卡扩展支持，如需开启 summary 功能请一并开启
   quiz: true # 启用文章内问题扩展支持
-  fancybox: true # 启用 fancybox 支持（不建议禁用）
+  fancybox: false # 启用 fancybox 支持（不建议禁用）
 
 # 优化性能区
 performance:

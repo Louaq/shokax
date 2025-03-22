@@ -273,3 +273,61 @@
   }
 }
 
+// 图片缩放相关样式
+.image-zoom-container {
+  will-change: opacity;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  
+  .image-zoom-img {
+    will-change: transform;
+    border-radius: 4px;
+    cursor: move;
+  }
+  
+  .image-zoom-close {
+    opacity: 0.7;
+    transition: opacity 0.3s, transform 0.3s;
+    
+    &:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+html.fancybox-enabled {
+  overflow: hidden !important;
+  
+  body {
+    touch-action: none;
+    -ms-touch-action: none;
+  }
+}
+
+.fancybox-custom-layout {
+  .fancybox-content {
+    background: transparent;
+  }
+  
+  &.fancybox-is-open {
+    .fancybox-bg {
+      opacity: 0.95;
+    }
+  }
+  
+  .fancybox-toolbar {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .fancybox-button {
+    background: transparent;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+

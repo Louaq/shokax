@@ -83,6 +83,9 @@ importers:
       katex:
         specifier: ^0.16.21
         version: 0.16.21
+      medium-zoom:
+        specifier: ^1.1.0
+        version: 1.1.0
       mouse-firework:
         specifier: 0.0.6
         version: 0.0.6
@@ -1345,6 +1348,9 @@ packages:
 
   mdurl@1.0.1:
     resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
+
+  medium-zoom@1.1.0:
+    resolution: {integrity: sha512-ewyDsp7k4InCUp3jRmwHBRFGyjBimKps/AJLjRSox+2q/2H4p/PNpQf+pwONWlJiOudkBXtbdmVbFjqyybfTmQ==}
 
   micro-memoize@4.1.2:
     resolution: {integrity: sha512-+HzcV2H+rbSJzApgkj0NdTakkC+bnyeiUxgT6/m7mjcz1CmM22KYFKp+EVj1sWe4UYcnriJr5uqHQD/gMHLD+g==}
@@ -3370,6 +3376,8 @@ snapshots:
   marked@15.0.4: {}
 
   mdurl@1.0.1: {}
+
+  medium-zoom@1.1.0: {}
 
   micro-memoize@4.1.2: {}
 
