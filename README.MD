@@ -1,6 +1,6 @@
 
 
-## 开始
+## 开始 [![Algolia Upload Records](https://github.com/Louaq/shokax/actions/workflows/algolia.yml/badge.svg)](https://github.com/Louaq/shokax/actions/workflows/algolia.yml)
 ShokaX 即食罐头，使用 pnpm 加热即可食用，执行下列命令：
 ```bash
 git clone https://github.com/theme-shoka-x/shokax-can --depth=1
