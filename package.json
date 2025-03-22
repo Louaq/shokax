@@ -32,7 +32,7 @@
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
-    "hexo-theme-shokax": "0.4.17",
+    "hexo-theme-shokax": "0.4.25",
     "hexo-util": "3.3.0",
     "instantsearch.js": "4.75.6",
     "js-yaml": "4.1.0",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^3.2.0",
-    "@types/node": "^20.11.24",
-    "typescript": "^5.3.3"
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.2"
   }
 }
