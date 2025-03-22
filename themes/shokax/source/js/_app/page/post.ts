@@ -5,21 +5,16 @@ import { CONFIG, BODY } from '../globals/globalVars'
 import { pageScroll, transition } from '../library/anime'
 import { mediaPlayer } from '../player'
 import { getDisplay, setDisplay, wrapObject } from '../library/proto'
+import { setupImageZoom } from './zoom'
 
 // 导入图片缩放功能
-import './zoom'
+// import './zoom'
 
 export const postBeauty = () => {
   if (!document.querySelector('.md')) { return }
 
-  // 使用我们的自定义图片缩放功能替代Fancybox
-  if (document.querySelector('.post.block .md img:not(.emoji):not(.vemoji)')) {
-    import('./zoom').then(({ setupImageZoom }) => {
-      setupImageZoom('.post.block .md img:not(.emoji):not(.vemoji)');
-    }).catch(err => {
-      console.error('Failed to load image zoom functionality:', err);
-    });
-  }
+  // 使用简单的图片缩放功能
+  setupImageZoom();
 
   (document.querySelector('.post.block') as HTMLTextAreaElement).oncopy = (event) => {
     showtip(LOCAL.copyright)
