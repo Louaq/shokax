@@ -14,92 +14,88 @@ declare global {
 export const postFancybox = (p:string) => {
   if (document.querySelector(p + ' .md img')) {
     vendorCss('fancybox')
-    vendorCss('justifiedGallery')
-    vendorJs('jquery', ()=>{
-      vendorJs('justifiedGallery',()=>{
-        vendorJs('fancybox', () => {
-          if (!window.jQuery) {
-            console.error('jQuery not loaded');
-            return;
+    vendorJs('jquery', () => {
+      vendorJs('fancybox', () => {
+        if (!window.jQuery) {
+          console.error('jQuery not loaded');
+          return;
+        }
+        
+        const q = window.jQuery.noConflict()
+
+        // 处理所有文章中的图片
+        $dom.each(p + ' .md img:not(.emoji):not(.vemoji)', (element) => {
+          const $image = q(element)
+          // 获取图片地址，优先使用data-src（针对懒加载图片）
+          const imageLink = DOMPurify.sanitize($image.attr('data-src') || $image.attr('src'))
+          
+          // 移除已存在的fancybox包装
+          if ($image.parent().is('a')) {
+            $image.unwrap();
           }
           
-          const q = window.jQuery.noConflict()
-
-          $dom.each(p + ' p.gallery', (element) => {
-            const box = document.createElement('div')
-            box.className = 'gallery'
-            box.setAttribute('data-height', String(element.getAttribute('data-height') || 220))
-
-            box.innerHTML = element.innerHTML.replace(/<br>/g, '')
-
-            if (element.parentNode) {
-              element.parentNode.insertBefore(box, element)
-              element.remove()
-            }
-          })
-
-          $dom.each(p + ' .md img:not(.emoji):not(.vemoji)', (element) => {
-            const $image = q(element)
-            const imageLink = DOMPurify.sanitize($image.attr('data-src') || $image.attr('src')) // 替换
-            const $imageWrapLink = $image.wrap('<a class="fancybox" href="' + imageLink + '" itemscope itemtype="https://schema.org/ImageObject" itemprop="url"></a>').parent('a')
-            let info; let captionClass = 'image-info'
-            if (!$image.is('a img')) {
-              $image.data('safe-src', imageLink)
-              if (!$image.is('.gallery img')) {
-                $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default')
-              } else {
-                captionClass = 'jg-caption'
-              }
-            }
-            if ((info = element.getAttribute('title'))) {
-              $imageWrapLink.attr('data-caption', info)
-              const para = document.createElement('span')
-              const txt = document.createTextNode(info)
-              para.appendChild(txt)
-              para.classList.add(captionClass)
-              insertAfter(element, para)
-            }
-          })
-
-          $dom.each(p + ' div.gallery', (el, i) => {
-            // @ts-ignore
-            q(el).justifiedGallery({
-              rowHeight: q(el).data('height') || 120,
-              rel: 'gallery-' + i
-            }).on('jg.complete', function () {
-              q(this).find('a').each((k, ele) => {
-                ele.setAttribute('data-fancybox', 'gallery-' + i)
-              })
-            })
-          })
-
-          // 修改 fancybox 初始化部分
-          if (typeof q.fn.fancybox === 'function') {
-            q.fancybox.defaults.hash = false
-            q(p + ' .fancybox').fancybox({
-              loop: true,
-              helpers: {
-                overlay: {
-                  locked: false
-                }
-              },
-              buttons: [
-                "zoom",
-                "slideShow",
-                "fullScreen",
-                "close"
-              ],
-              protect: true,
-              animationEffect: "zoom",
-              touch: {
-                vertical: true,
-                momentum: true
-              }
-            })
-          } else {
-            console.error('fancybox not loaded properly');
+          // 重新包装fancybox链接
+          const $imageWrapLink = $image.wrap('<a class="fancybox" href="' + imageLink + '" itemscope itemtype="https://schema.org/ImageObject" itemprop="url"></a>').parent('a')
+          
+          // 设置data-fancybox属性
+          $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default')
+          
+          // 处理标题
+          const info = element.getAttribute('title') || element.getAttribute('alt')
+          if (info) {
+            $imageWrapLink.attr('data-caption', info)
+            const para = document.createElement('span')
+            const txt = document.createTextNode(info)
+            para.appendChild(txt)
+            para.classList.add('image-info')
+            insertAfter(element, para)
           }
-        }, window.jQuery)
+        })
+
+        // 修改fancybox初始化配置
+        if (typeof q.fn.fancybox === 'function') {
+          q.fancybox.defaults.hash = false
+          q(p + ' .fancybox').fancybox({
+            loop: true,
+            buttons: [
+              "zoom",
+              "slideShow",
+              "fullScreen",
+              "download",
+              "thumbs",
+              "close"
+            ],
+            protect: true,
+            animationEffect: "zoom",
+            animationDuration: 366,
+            clickContent: false,
+            clickSlide: false,
+            mobile: {
+              clickContent: function(current, event) {
+                return current.type === "image" ? "toggleControls" : false;
+              },
+              clickSlide: function(current, event) {
+                return current.type === "image" ? "toggleControls" : false;
+              },
+            },
+            wheel: false,
+            toolbar: true,
+            preventCaptionOverlap: true,
+            touch: {
+              vertical: true,
+              momentum: true
+            },
+            beforeShow: function(instance, current) {
+              // 确保图片已加载
+              const $img = q(current.opts.$orig).find('img')
+              if ($img.length && $img.attr('data-src')) {
+                $img.attr('src', $img.attr('data-src'))
+              }
+            }
+          })
+        } else {
+          console.error('fancybox not loaded properly')
+        }
       })
     })
   }

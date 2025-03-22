@@ -46,6 +46,8 @@
     "vue": "3.5.13"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.2.0"
+    "@types/dompurify": "^3.2.0",
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
   }
 }
