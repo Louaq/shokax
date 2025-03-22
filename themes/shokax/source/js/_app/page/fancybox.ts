@@ -22,6 +22,7 @@ export const postFancybox = (p:string) => {
         }
         
         const q = window.jQuery.noConflict()
+        let scrollPos = 0; // 保存滚动位置
 
         // 处理所有文章中的图片
         $dom.each(p + ' .md img:not(.emoji):not(.vemoji)', (element) => {
@@ -83,7 +84,11 @@ export const postFancybox = (p:string) => {
               vertical: true,
               momentum: true
             },
+            baseClass: "fancybox-custom-layout",
             beforeShow: function(instance, current) {
+              // 保存当前滚动位置
+              scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+              
               // 确保图片已加载
               const $img = q(current.opts.$orig).find('img')
               if ($img.length && $img.attr('data-src')) {
@@ -108,6 +113,16 @@ export const postFancybox = (p:string) => {
                   return false
                 }
               })
+            },
+            afterClose: function() {
+              // 恢复滚动位置
+              window.scrollTo({
+                top: scrollPos,
+                behavior: 'instant'
+              });
+              
+              // 移除键盘事件监听
+              q(document).off('keydown.fb');
             }
           })
         } else {
