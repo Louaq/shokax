@@ -1,4 +1,3 @@
-
 @keyframes rainbow {
   to {
     background-position: -2000vw;
@@ -125,11 +124,24 @@
     margin-bottom: 1.25rem;
   }
 
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
   .image-info {
     display: block;
     text-align: center;
     font-size: $font-size-smaller;
     color: var(--grey-4);
+    margin-top: 0.5em;
   }
 
   .video-container {

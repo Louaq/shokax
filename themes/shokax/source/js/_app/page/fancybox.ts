@@ -38,7 +38,7 @@ export const postFancybox = (p:string) => {
           const $imageWrapLink = $image.wrap('<a class="fancybox" href="' + imageLink + '" itemscope itemtype="https://schema.org/ImageObject" itemprop="url"></a>').parent('a')
           
           // 设置data-fancybox属性
-          $imageWrapLink.attr('data-fancybox', 'default').attr('rel', 'default')
+          $imageWrapLink.attr('data-fancybox', 'gallery').attr('rel', 'gallery')
           
           // 处理标题
           const info = element.getAttribute('title') || element.getAttribute('alt')
@@ -68,15 +68,13 @@ export const postFancybox = (p:string) => {
             protect: true,
             animationEffect: "zoom",
             animationDuration: 366,
-            clickContent: false,
-            clickSlide: false,
+            clickContent: "zoom-or-close",
+            clickSlide: "close",
             mobile: {
-              clickContent: function(current, event) {
-                return current.type === "image" ? "toggleControls" : false;
-              },
-              clickSlide: function(current, event) {
-                return current.type === "image" ? "toggleControls" : false;
-              },
+              clickContent: "zoom-or-close",
+              clickSlide: "close",
+              dblclickContent: "zoom",
+              dblclickSlide: "zoom"
             },
             wheel: false,
             toolbar: true,
@@ -91,6 +89,25 @@ export const postFancybox = (p:string) => {
               if ($img.length && $img.attr('data-src')) {
                 $img.attr('src', $img.attr('data-src'))
               }
+            },
+            afterShow: function(instance, current) {
+              // 添加键盘快捷键支持
+              q(document).on('keydown.fb', function (e) {
+                // ESC键关闭
+                if (e.keyCode === 27) {
+                  instance.close()
+                  return false
+                }
+                // 空格键播放/暂停幻灯片
+                if (e.keyCode === 32) {
+                  if (instance.SlideShow.isActive) {
+                    instance.SlideShow.stop()
+                  } else {
+                    instance.SlideShow.start()
+                  }
+                  return false
+                }
+              })
             }
           })
         } else {
