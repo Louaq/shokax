@@ -110,6 +110,11 @@ visitor:
   clarity: false
   baiduAnalytics: false
   googleAnalytics: false
-
+reward:
+  # If true, a donate button will be displayed in every article by default.
+  enable: false
+  animation: false
+  #comment: Buy me a coffee
+  comment: 您的鼓励是我最大的动力！
 darkmode: false # true/false分别对应打开/关闭夜间模式
 auto_scroll: false
