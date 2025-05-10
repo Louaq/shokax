@@ -35,7 +35,7 @@ social:
   music: https://music.163.com/?from=infinity#/user/home?id=1525018658 || cloud-music || "#e60026"
   weibo: https://www.weibo.com/u/5769723850 || weibo || "#ea716e"
   about: https://about.me/yourname || address-card || "#3b5998"
-  email: mailto:yangyang@mail.scuec.edu.cn || envelope || "#55acd5"
+  email: mailto:beautbawj9@gmail.com || envelope || "#55acd5"
   douban: https://www.douban.com/people/253156361 || douban
 
 waline:
@@ -76,7 +76,7 @@ audio:
 # random image api
 image_server: https://api.fuchenboke.cn/api/dongman.php
 
-alternate: "Drawing Life" #站点大标题，（比 title 高一级，但仅在 index 显示）
+alternate: "Louaq" #站点大标题，（比 title 高一级，但仅在 index 显示）
 
 widgets:
   random_posts: true # 随机文章
